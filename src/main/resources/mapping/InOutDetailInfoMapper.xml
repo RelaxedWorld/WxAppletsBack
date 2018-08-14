@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zsy.bookkeeping.mapper.InOutDetailInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zsy.bookkeeping.model.InOutDetailInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <id column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="inout_type_id" property="inoutTypeId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="BIGINT" />
+    <result column="inout_account_id" property="inoutAccountId" jdbcType="BIGINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_user_id, inout_type_id, amount, inout_account_id, remark, create_time, 
+    modify_time
+  </sql>
+  <sql id="Base_Column_OrderByCreatedTime"> ORDER BY create_time DESC </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zsy.bookkeeping.model.InOutDetailInfoKey" >
+    select
+    <include refid="Base_Column_List" />
+    from income_expenditure_detail
+    where id = #{id,jdbcType=BIGINT}
+      and create_user_id = #{createUserId,jdbcType=VARCHAR}
+    <include refid="Base_Column_OrderByCreatedTime" />
+  </select>
+  <select id="selectSelective" parameterType="com.zsy.bookkeeping.model.InOutDetailInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from income_expenditure_detail
+    <where>
+      <if test="id != null" >
+        id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="createUserId != null" >
+        and create_user_id = #{createUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="inoutTypeId != null" >
+        and inout_type_id = #{inoutTypeId,jdbcType=INTEGER}
+      </if>
+      <if test="amount != null" >
+        and amount = #{amount,jdbcType=BIGINT}
+      </if>
+      <if test="inoutAccountId != null" >
+        and inout_account_id = #{inoutAccountId,jdbcType=BIGINT}
+      </if>
+      <if test="remark != null" >
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modifyTime != null" >
+        and modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    <include refid="Base_Column_OrderByCreatedTime" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zsy.bookkeeping.model.InOutDetailInfoKey" >
+    delete from income_expenditure_detail
+    where id = #{id,jdbcType=BIGINT}
+      and create_user_id = #{createUserId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zsy.bookkeeping.model.InOutDetailInfo" >
+    insert into income_expenditure_detail (id, create_user_id, inout_type_id, 
+      amount, inout_account_id, remark, 
+      create_time, modify_time)
+    values (#{id,jdbcType=BIGINT}, #{createUserId,jdbcType=VARCHAR}, #{inoutTypeId,jdbcType=INTEGER}, 
+      #{amount,jdbcType=BIGINT}, #{inoutAccountId,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zsy.bookkeeping.model.InOutDetailInfo" >
+    insert into income_expenditure_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="inoutTypeId != null" >
+        inout_type_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="inoutAccountId != null" >
+        inout_account_id,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="inoutTypeId != null" >
+        #{inoutTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="inoutAccountId != null" >
+        #{inoutAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zsy.bookkeeping.model.InOutDetailInfo" >
+    update income_expenditure_detail
+    <set >
+      <if test="inoutTypeId != null" >
+        inout_type_id = #{inoutTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=BIGINT},
+      </if>
+      <if test="inoutAccountId != null" >
+        inout_account_id = #{inoutAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+      and create_user_id = #{createUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zsy.bookkeeping.model.InOutDetailInfo" >
+    update income_expenditure_detail
+    set inout_type_id = #{inoutTypeId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=BIGINT},
+      inout_account_id = #{inoutAccountId,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+      and create_user_id = #{createUserId,jdbcType=VARCHAR}
+  </update>
+</mapper>
